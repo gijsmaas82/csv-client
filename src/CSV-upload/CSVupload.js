@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { CSVLink } from "react-csv"
 import { Form, Button, Table } from 'react-bootstrap'
 
 export default class CSVupload extends Component {
   state = {
     selectedFile: null,
     fileUploaded: false,
-    data: []
+    data: [],
+    headers: [
+      {label: "id", key: "id"},
+      {label: "level", key: "level"},
+      {label: "cvss", key: "cvss"},
+      {label: "title", key: "title"},
+      {label: "Vulnerability", key: "Vulnerability"},
+      {label: "Solution", key: "Solution"},
+      {label: "reference", key: "reference"}
+    ]
   }
 
 onChangeHandler=event=>{
@@ -49,8 +59,11 @@ getData = () => {
           <Button variant="primary" onClick={this.onClickHandler}>Upload</Button>
         </Form> :
         <div>
-        <h2>Click on the button to get the data</h2>
+        <h3>Click on the button to get the data or click on the link to get a CSV-file.</h3>
         <Button variant="primary" onClick={this.getData}>Get Data</Button>
+        <CSVLink data={this.state.data} headers={this.state.headers}>
+          Download CSV-file
+        </CSVLink>
         <Table striped bordered hover size="sm">
           <thead>
             <tr>
