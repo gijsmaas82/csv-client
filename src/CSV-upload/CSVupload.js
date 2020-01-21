@@ -40,7 +40,6 @@ onClickHandler = () => {
 getData = () => {
   axios.get("http://localhost:5000/data")
     .then(res => {
-      // console.log(res.data)
       this.setState({
         data: res.data
       })
